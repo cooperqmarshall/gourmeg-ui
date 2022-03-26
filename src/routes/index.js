@@ -1,55 +1,47 @@
-import {
-  createRouter,
-  createWebHistory
-} from 'vue-router'
-import Home from '@/views/Home.vue'
-import SignIn from '@/views/SignIn.vue'
-import Register from '@/views/Register.vue'
-import store from '@/store'
-import axios from 'axios'
-import _ from 'lodash'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "@/views/Home.vue";
+import SignIn from "@/views/SignIn.vue";
+import Register from "@/views/Register.vue";
+import Lists from "@/views/Lists.vue";
+import store from "@/store";
 
-
-const routes = [{
-    path: '/',
+const routes = [
+  {
+    path: "/",
     component: Home,
     meta: {
       requiresAuth: true,
     },
   },
   {
-    path: '/signin',
-    component: SignIn
+    path: "/signin",
+    component: SignIn,
   },
   {
-    path: '/register',
-    component: Register
-  }
-]
+    path: "/register",
+    component: Register,
+  },
+  {
+    path: "/lists",
+    component: Lists,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: routes
-})
+  routes: routes,
+});
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth) {
+router.beforeEach(async (to, from, next) => {
+  if (to.meta.requiresAuth & !store.state.user) {
+    await store.dispatch("getUser");
     if (!store.state.user) {
-      axios.get('http://localhost:5000/api/v1/me', {
-        withCredentials: true
-      }).then((response) => {
-        console.log(response.data)
-        if (_.isEmpty(response.data)) {
-          next({
-            path: "/signin"
-          });
-        } else {
-          store.commit("login", response.data);
-          next();
-        }
-      }).catch((error) => {
-        console.log(error)
-      })
+      next({
+        path: "/signin",
+      });
     } else {
       next();
     }
@@ -58,4 +50,4 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-export default router
+export default router;

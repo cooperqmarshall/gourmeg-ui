@@ -27,6 +27,7 @@
     >
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Home</router-link>
+        <router-link class="navbar-item" to="/lists">Lists</router-link>
 
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link"> More </a>
@@ -75,5 +76,5 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
+

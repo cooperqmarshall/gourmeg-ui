@@ -59,12 +59,12 @@ export default {
     submit() {
       this.isLoading = true;
       axios
-        .post("http://127.0.0.1:5000/api/v1/register", {
+        .post(`${this.$store.state.hostname}/api/v1/register`, {
           username: this.username,
           password: this.password,
         })
         .then((response) => {
-          this.user = response.data;
+          this.$store.commit("login", response.data);
           this.$router.push("/");
         })
         .catch((error) => {
