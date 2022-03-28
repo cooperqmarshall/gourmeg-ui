@@ -4,7 +4,7 @@ import axios from "axios";
 const store = createStore({
   state() {
     return {
-      hostname: "http://localhost:5000",
+      hostname: process.env.VUE_APP_API_URL,
       user: null,
       recipe_lists: null,
       recipes: null,

@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <a :href="recipe.url" target="_blank">{{ recipe.name }}</a>
-    <div v-html="recipe.data"></div>
+  <div class="content">
+    <h1>
+      <a :href="recipe.url" target="_blank">{{ recipe.name }}</a>
+    </h1>
+    <p v-html="recipe.ingredients"></p>
+    <p v-html="recipe.instructions"></p>
   </div>
 </template>
 
