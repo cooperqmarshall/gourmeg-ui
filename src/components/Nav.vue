@@ -28,38 +28,38 @@
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Home</router-link>
         <router-link class="navbar-item" to="/lists">Lists</router-link>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> More </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item"> About </a>
-            <a class="navbar-item"> Jobs </a>
-            <a class="navbar-item"> Contact </a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item"> Report an issue </a>
-          </div>
-        </div>
       </div>
       <div class="navbar-end">
-        <router-link
+        <div
           v-if="this.$store.state.user"
-          class="navbar-item"
-          to="/profile"
-          >Hello {{ this.$store.state.user.username }}</router-link
+          class="navbar-item has-dropdown is-hoverable"
         >
+          <a class="navbar-link">
+            Hello {{ this.$store.state.user.username }}
+          </a>
+          <div class="navbar-dropdown">
+            <router-link class="navbar-item" to="/profile"
+              >Profile
+            </router-link>
+            <a class="navbar-item"> Settings </a>
+            <hr class="navbar-divider" />
+            <a class="navbar-item"> Logout </a>
+          </div>
+        </div>
         <router-link
           v-if="!this.$store.state.user"
           class="navbar-item"
           to="/register"
           >Register</router-link
         >
+
         <router-link
           v-if="!this.$store.state.user"
           class="navbar-item"
           to="/signin"
-          >Sign In</router-link
         >
+          Sign In
+        </router-link>
       </div>
     </div>
   </nav>
@@ -76,5 +76,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
-
+<style scoped>
+.navbar-menu,
+.navbar-dropdown {
+  background: #00d1b2;
+}
+.navbar-item,
+.navbar-link {
+  color: white;
+}
+</style>
