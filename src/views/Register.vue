@@ -63,9 +63,23 @@ export default {
           username: this.username,
           password: this.password,
         })
-        .then((response) => {
-          this.$store.commit("login", response.data);
-          this.$router.push("/");
+        .then(() => {
+          axios
+            .post(
+              `${this.$store.state.hostname}/api/v1/signin`,
+              {
+                username: this.username,
+                password: this.password,
+              },
+              { withCredentials: true }
+            )
+            .then((response) => {
+              this.$store.commit("login", response.data);
+              this.$router.push("/");
+            })
+            .catch(() => {
+              this.$router.push("/signin");
+            });
         })
         .catch((error) => {
           if (error.response) {
