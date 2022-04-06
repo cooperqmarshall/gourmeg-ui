@@ -1,7 +1,16 @@
 <template>
   <li>
-    <a style="display: flex" @click="this.isDropDown = !isDropDown"
-      ><div style="flex-grow: 3">{{ recipe_list.name }}</div>
+    <a
+      style="display: flex; align-items: center"
+      @click="this.isDropDown = !isDropDown"
+    >
+      <span class="icon has-text-primary"
+        ><i
+          class="fas"
+          :class="{ 'fa-caret-down': !isDropDown, 'fa-caret-up': isDropDown }"
+        ></i
+      ></span>
+      <div style="flex-grow: 3">{{ recipe_list.name }}</div>
       <div>
         <span v-if="isDropDown" class="icon"><i class="fas fa-pen"></i></span>
         <button
@@ -9,12 +18,6 @@
           @click="delete_recipe_list"
           class="delete"
         ></button>
-        <span class="icon has-text-primary"
-          ><i
-            class="fas"
-            :class="{ 'fa-caret-down': !isDropDown, 'fa-caret-up': isDropDown }"
-          ></i
-        ></span>
       </div>
     </a>
     <ul v-if="isDropDown">
