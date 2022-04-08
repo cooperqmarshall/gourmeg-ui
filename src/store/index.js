@@ -33,7 +33,7 @@ const store = createStore({
       return axios
         .get(`${this.state.hostname}/api/v1/me`, { withCredentials: true })
         .then((response) => {
-          commit("login", response.data);
+          commit("set_user", response.data);
         })
         .catch(() => {
           // not authorized
@@ -47,10 +47,16 @@ const store = createStore({
         })
         .then((res) => console.log(res));
     },
+    logout({ commit }) {
+      return axios
+        .get(`${this.state.hostname}/api/v1/logout`, { withCredentials: true })
+        .then(() => commit("set_user", null))
+        .catch((err) => console.log(err));
+    },
   },
 
   mutations: {
-    login(state, user) {
+    set_user(state, user) {
       state.user = user;
     },
     set_recipe_lists(state, lists) {

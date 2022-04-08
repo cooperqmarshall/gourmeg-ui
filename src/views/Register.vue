@@ -74,7 +74,7 @@ export default {
               { withCredentials: true }
             )
             .then((response) => {
-              this.$store.commit("login", response.data);
+              this.$store.commit("set_user", response.data);
               this.$router.push("/");
             })
             .catch(() => {

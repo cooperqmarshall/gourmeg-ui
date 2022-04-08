@@ -43,7 +43,7 @@
             </router-link>
             <a class="navbar-item"> Settings </a>
             <hr class="navbar-divider" />
-            <a class="navbar-item"> Logout </a>
+            <a class="navbar-item" @click="logout"> Logout </a>
           </div>
         </div>
         <router-link
@@ -72,6 +72,12 @@ export default {
     return {
       active: false,
     };
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch("logout");
+      this.$router.push("/signin");
+    },
   },
 };
 </script>
