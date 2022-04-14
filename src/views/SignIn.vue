@@ -2,7 +2,6 @@
   <div class="section">
     <div class="container">
       <h1 class="title has-text-centered">Sign In</h1>
-      <h2 class="subtitle has-text-centered">Subtitle</h2>
       <div class="mb-4">
         <AuthInput
           :label="'username'"
@@ -24,6 +23,15 @@
       >
         Submit
       </button>
+      <span
+        ><p>need to create an account?</p>
+        <button
+          @click="this.$router.push('/register')"
+          class="button is-light is-link right"
+        >
+          Register
+        </button>
+      </span>
     </div>
   </div>
 </template>
@@ -78,5 +86,16 @@ export default {
 <style scoped>
 .container {
   max-width: 500px !important;
+}
+.right {
+  float: right;
+}
+span {
+  float: right;
+  display: flex;
+  align-items: center;
+}
+p {
+  padding-right: 5px;
 }
 </style>

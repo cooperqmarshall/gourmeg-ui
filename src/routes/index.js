@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "@/views/Home.vue";
 import SignIn from "@/views/SignIn.vue";
 import Register from "@/views/Register.vue";
+import Landing from "@/views/Landing.vue";
 import Lists from "@/views/Lists.vue";
 import store from "@/store";
 
@@ -12,6 +13,10 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/about",
+    component: Landing,
   },
   {
     path: "/signin",
@@ -40,7 +45,7 @@ router.beforeEach(async (to, from, next) => {
     await store.dispatch("getUser");
     if (!store.state.user) {
       next({
-        path: "/signin",
+        path: "/about",
       });
     } else {
       next();

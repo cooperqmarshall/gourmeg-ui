@@ -28,6 +28,7 @@
       <div class="navbar-start">
         <router-link class="navbar-item" to="/">Home</router-link>
         <router-link class="navbar-item" to="/lists">Lists</router-link>
+        <router-link class="navbar-item" to="/about">About</router-link>
       </div>
       <div class="navbar-end">
         <div
@@ -76,7 +77,7 @@ export default {
   methods: {
     async logout() {
       await this.$store.dispatch("logout");
-      this.$router.push("/signin");
+      this.$router.push("/about");
     },
   },
 };

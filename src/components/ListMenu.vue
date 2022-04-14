@@ -40,6 +40,7 @@ export default {
   data() {
     return {
       isDropDown: false,
+      list_focus: true,
     };
   },
   methods: {
@@ -58,6 +59,18 @@ export default {
     recipe_view_id() {
       return this.$store.state.recipe_view.id;
     },
+  },
+  beforeMount() {
+    this.list_focus = true;
+  },
+  updated() {
+    if (this.list_focus && this.recipe_list.recipes) {
+      console.log("check");
+      if (this.recipe_list.recipes.find((r) => r.id === this.recipe_view_id)) {
+        this.isDropDown = true;
+      }
+      this.list_focus = false;
+    }
   },
 };
 </script>

@@ -1,45 +1,65 @@
 <template>
-  <div class="section">
+  <div class="block">
     <div class="columns is-centered">
-      <div class="column is-4">
-        <input
-          v-model="url"
-          type="text"
-          class="card input"
-          placeholder="http://recipe..."
-        />
-      </div>
-      <div
-        class="dropdown column is-2"
-        :class="{ 'is-active': listDropdownActive }"
-        @click="listDropdownActive = true"
-      >
-        <div
-          v-click-outside="clickOutside"
-          class="card dropdown-trigger control has-icons-right"
-        >
-          <input
-            v-model="list"
-            class="input dropdown-input"
-            aria-haspopup="true"
-            aria-controls="dropdown-menu"
-          />
-          <span class="icon is-right is-small">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
+      <div class="column is-6">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">URL:</label>
+          </div>
+          <div class="field-body">
+            <div class="field">
+              <div class="control">
+                <input
+                  v-model="url"
+                  type="text"
+                  class="card input"
+                  placeholder="Recipe Website URL"
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a
-              v-for="item in lists"
-              @click="this.list = item.name"
-              :key="item.id"
-              class="dropdown-item"
-            >
-              {{ item.name }}
-            </a>
-            <hr v-if="list" class="dropdown-divider" />
-            <a v-if="list" class="dropdown-item"> + {{ list }} </a>
+      </div>
+      <div class="column is-4" @click="listDropdownActive = true">
+        <div class="field is-horizontal">
+          <div class="field-label is-normal">
+            <label class="label">List:</label>
+          </div>
+          <div
+            class="field-body dropdown"
+            :class="{ 'is-active': listDropdownActive }"
+          >
+            <div class="field">
+              <div
+                v-click-outside="clickOutside"
+                class="control dropdown-trigger has-icons-right"
+              >
+                <input
+                  v-model="list"
+                  class="input dropdown-input"
+                  aria-haspopup="true"
+                  aria-controls="dropdown-menu"
+                  placeholder="List Name"
+                />
+                <span class="icon is-right is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </div>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+              <div class="dropdown-content">
+                <a
+                  v-for="item in lists"
+                  @click="this.list = item.name"
+                  :key="item.id"
+                  class="dropdown-item"
+                >
+                  {{ item.name }}
+                </a>
+                <hr v-if="list" class="dropdown-divider" />
+                <a v-if="list" class="dropdown-item"> + {{ list }} </a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

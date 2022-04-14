@@ -7,9 +7,15 @@
 
 <script>
 import Nav from "./components/Nav.vue";
+import AOS from "aos";
+import "aos/dist/aos.css";
+
 export default {
   name: "App",
   components: { Nav },
+  mounted() {
+    AOS.init({ once: true });
+  },
 };
 </script>
 
