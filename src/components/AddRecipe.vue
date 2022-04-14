@@ -32,7 +32,7 @@
             <div class="field">
               <div
                 v-click-outside="clickOutside"
-                class="control dropdown-trigger has-icons-right"
+                class="control dropdown-trigger card has-icons-right"
               >
                 <input
                   v-model="list"
@@ -66,7 +66,7 @@
       <div class="column is-1">
         <button
           @click="add_recipe"
-          class="button"
+          class="button is-light is-primary"
           :class="{ 'is-loading': addLoading }"
         >
           Add

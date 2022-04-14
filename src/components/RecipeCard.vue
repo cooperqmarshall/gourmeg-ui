@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-4">
+  <div data-aos="flip-down" class="column is-4">
     <div @mouseover="hover = true" @mouseleave="hover = false" class="card">
       <a @click="focus_recipe(recipe)"
         ><div class="card-content">

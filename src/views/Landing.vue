@@ -59,7 +59,7 @@
             <div class="card-content">
               <div class="content">
                 <h3 class="title">
-                  <span class="has-text-info">1.</span> Search for Recicpes
+                  <span class="has-text-info">1.</span> Search for Recipes
                 </h3>
                 <p class="subtitle">
                   Search the internet to find recipes that you like from your
@@ -109,6 +109,7 @@
       </div>
       <div class="block has-text-centered">
         <button
+          data-aos="zoom-in"
           @click="this.$router.push('register')"
           class="button is-size-5 is-primary"
         >
