@@ -1,24 +1,15 @@
-# recipe
+# Gourmeg UI
+Front-end for [gourmeg.org](https://gourmeg.org). Built with vue.js.
 
-## Project setup
-```
-npm install
-```
+Check out the accompanying [API repository](https://github.com/cooperqmarshall/gourmeg-api/)!
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Install
+1. Download dependencies
 
-### Compiles and minifies for production
-```
-npm run build
-```
+		npm i
 
-### Lints and fixes files
-```
-npm run lint
-```
+2. Clone the API repository and follow the steps for installation. Using the production API may cause issues dues to the SameSite cookies.
+3. Configure the `.env` file to point tot he API url
+4. Run the app
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+		npm run serve
