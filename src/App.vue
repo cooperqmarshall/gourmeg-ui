@@ -26,7 +26,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   cursor: url("/pizzaslice_1.png"), auto;
 }
-a {
-  cursor: url("/whole_pizza.png"), auto;
+a,
+button {
+  cursor: url("/whole_pizza.png"), auto !important;
 }
 </style>
