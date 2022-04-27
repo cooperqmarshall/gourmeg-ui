@@ -1,16 +1,21 @@
 <template>
   <div data-aos="flip-down" class="column is-4">
-    <div @mouseover="hover = true" @mouseleave="hover = false" class="card">
-      <a @click="focus_recipe(recipe)"
-        ><div class="card-content">
-          <img v-if="image" :src="image" />
-          <p class="title is-5">
-            {{ recipe.name }}
-          </p>
-          <p class="title is-5">{{ recipe.recipe_list_name }}</p>
-        </div>
-      </a>
-      <button v-if="hover" @click="delete_recipe" class="delete"></button>
+    <div class="card">
+      <div v-if="image" class="card-image">
+        <figure class="image is-4by2">
+          <img :src="image" />
+        </figure>
+      </div>
+      <div class="card-content">
+        <p class="title is-5">
+          {{ recipe.name }}
+        </p>
+        <p class="title is-5">{{ recipe.recipe_list_name }}</p>
+        <button @click="focus_recipe(recipe)" class="button recipe-btn">
+          Go to Recipe
+        </button>
+      </div>
+      <button @click="delete_recipe" class="delete"></button>
     </div>
   </div>
 </template>
@@ -21,11 +26,6 @@ import axios from "axios";
 export default {
   name: "RecipeCard",
   props: ["recipe"],
-  data() {
-    return {
-      hover: false,
-    };
-  },
   computed: {
     image() {
       return this.recipe.image_urls
@@ -73,5 +73,11 @@ img {
   height: 200px;
   object-fit: cover;
   object-position: 100% 50%;
+}
+p {
+  margin-bottom: 5px !important;
+}
+.recipe-btn {
+  float: right;
 }
 </style>
