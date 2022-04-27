@@ -77,7 +77,4 @@ img {
 p {
   margin-bottom: 5px !important;
 }
-.recipe-btn {
-  float: right;
-}
 </style>
