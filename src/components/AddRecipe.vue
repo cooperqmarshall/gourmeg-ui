@@ -26,20 +26,19 @@
             <label class="label">List:</label>
           </div>
           <div
+            v-click-outside="clickOutside"
             class="field-body dropdown"
             :class="{ 'is-active': listDropdownActive }"
           >
             <div class="field">
-              <div
-                v-click-outside="clickOutside"
-                class="control dropdown-trigger card has-icons-right"
-              >
+              <div class="control dropdown-trigger card has-icons-right">
                 <input
                   v-model="list"
                   class="input dropdown-input"
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
                   placeholder="List Name"
+                  Name
                 />
                 <span class="icon is-right is-small">
                   <i class="fas fa-angle-down" aria-hidden="true"></i>
