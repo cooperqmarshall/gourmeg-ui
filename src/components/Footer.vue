@@ -12,6 +12,6 @@ export default {
 
 <style scoped>
 footer {
-  height: 30px;
+  min-height: 10vh;
 }
 </style>
