@@ -26,9 +26,15 @@
       :class="{ 'is-active': active }"
     >
       <div class="navbar-start">
-        <router-link class="navbar-item" to="/">Home</router-link>
-        <router-link class="navbar-item" to="/lists">Lists</router-link>
-        <router-link class="navbar-item" to="/about">About</router-link>
+        <router-link class="navbar-item" @click="active = !active" to="/"
+          >Home</router-link
+        >
+        <router-link class="navbar-item" @click="active = !active" to="/lists"
+          >Lists</router-link
+        >
+        <router-link class="navbar-item" @click="active = !active" to="/about"
+          >About</router-link
+        >
       </div>
       <div class="navbar-end">
         <div
@@ -39,10 +45,13 @@
             Hello {{ this.$store.state.user.username }}
           </a>
           <div class="navbar-dropdown">
-            <router-link class="navbar-item" to="/profile"
+            <router-link
+              class="navbar-item"
+              @click="active = !active"
+              to="/profile"
               >Profile
             </router-link>
-            <a class="navbar-item"> Settings </a>
+            <a class="navbar-item" @click="active = !active"> Settings </a>
             <hr class="navbar-divider" />
             <a class="navbar-item" @click="logout"> Logout </a>
           </div>
@@ -50,6 +59,7 @@
         <router-link
           v-if="!this.$store.state.user"
           class="navbar-item"
+          @click="active = !active"
           to="/register"
           >Register</router-link
         >
@@ -57,6 +67,7 @@
         <router-link
           v-if="!this.$store.state.user"
           class="navbar-item"
+          @click="active = !active"
           to="/signin"
         >
           Sign In
@@ -76,6 +87,7 @@ export default {
   },
   methods: {
     async logout() {
+      this.active = !this.active;
       await this.$store.dispatch("logout");
       this.$router.push("/about");
     },

@@ -4,10 +4,10 @@
       style="display: flex; align-items: center"
       @click="this.isDropDown = !isDropDown"
     >
-      <span class="icon has-text-primary"
+      <span class="icon has-text-primary is-size-5"
         ><i
           class="fas"
-          :class="{ 'fa-caret-down': !isDropDown, 'fa-caret-up': isDropDown }"
+          :class="{ 'fa-angle-down': !isDropDown, 'fa-angle-up': isDropDown }"
         ></i
       ></span>
       <div style="flex-grow: 3">{{ recipe_list.name }}</div>
@@ -65,7 +65,6 @@ export default {
   },
   updated() {
     if (this.list_focus && this.recipe_list.recipes) {
-      console.log("check");
       if (this.recipe_list.recipes.find((r) => r.id === this.recipe_view_id)) {
         this.isDropDown = true;
       }

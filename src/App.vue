@@ -2,19 +2,21 @@
   <div>
     <Nav />
     <router-view />
+    <Footer />
   </div>
 </template>
 
 <script>
 import Nav from "./components/Nav.vue";
+import Footer from "@/components/Footer.vue";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 export default {
   name: "App",
-  components: { Nav },
+  components: { Nav, Footer },
   mounted() {
-    AOS.init({ once: true });
+    AOS.init({ once: true, offset: 60, duration: 200 });
   },
 };
 </script>

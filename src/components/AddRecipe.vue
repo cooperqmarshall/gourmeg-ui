@@ -44,19 +44,18 @@
                   <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
               </div>
-            </div>
-            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-              <div class="dropdown-content">
-                <a
-                  v-for="item in lists"
-                  @click="this.list = item.name"
-                  :key="item.id"
-                  class="dropdown-item"
-                >
-                  {{ item.name }}
-                </a>
-                <hr v-if="list" class="dropdown-divider" />
-                <a v-if="list" class="dropdown-item"> + {{ list }} </a>
+              <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                <div class="dropdown-content">
+                  <a
+                    v-for="item in lists"
+                    @click="this.list = item.name"
+                    :key="item.id"
+                    class="dropdown-item"
+                  >
+                    {{ item.name }}
+                  </a>
+                  <a v-if="list" class="dropdown-item"> + {{ list }} </a>
+                </div>
               </div>
             </div>
           </div>
@@ -84,7 +83,7 @@ export default {
   name: "AddRecipe",
   data() {
     return {
-      list: null,
+      list: "",
       url: null,
       listDropdownActive: false,
       addLoading: false,
@@ -102,7 +101,9 @@ export default {
   },
   computed: {
     lists() {
-      return this.$store.state.recipe_lists;
+      return this.$store.state.recipe_lists?.filter((l) =>
+        l.name.includes(this.list)
+      );
     },
   },
   methods: {
