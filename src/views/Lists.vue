@@ -17,7 +17,7 @@
         </div>
         <div
           class="column is-three-fifths-mobile is-one-quarter-tablet list-menu"
-          v-if="sidebarVisible"
+          :class="{ hidden: !sidebarVisible }"
         >
           <div class="menu">
             <div class="menu-label" style="display: flex; align-items: center">
@@ -74,5 +74,8 @@ export default {
   top: 0px;
   align-self: flex-start;
   z-index: 1;
+}
+.hidden {
+  display: none;
 }
 </style>
