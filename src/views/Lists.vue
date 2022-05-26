@@ -3,7 +3,10 @@
     <div class="container">
       <h1 class="title is-2 has-text-centered">Lists</h1>
       <AddRecipe />
-      <div class="columns is-mobile">
+      <div
+        class="columns is-mobile"
+        :class="{ 'is-flex-direction-column': !sidebarVisible }"
+      >
         <div v-if="!sidebarVisible" class="list-menu">
           <span
             @click="sidebarVisible = !sidebarVisible"
@@ -50,7 +53,7 @@ export default {
   name: "Lists",
   data() {
     return {
-      sidebarVisible: true,
+      sidebarVisible: false,
     };
   },
   components: { ListMenu, RecipeView, AddRecipe },
@@ -67,9 +70,9 @@ export default {
 
 <style scoped>
 .list-menu {
-  min-height: 50vh;
   position: sticky;
   top: 0px;
   align-self: flex-start;
+  z-index: 1;
 }
 </style>
