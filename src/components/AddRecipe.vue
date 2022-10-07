@@ -28,12 +28,14 @@
           <div
             v-click-outside="clickOutside"
             class="field-body dropdown"
+            style="width: 100%"
             :class="{ 'is-active': listDropdownActive }"
           >
-            <div class="field">
+            <div class="field" style="width: 100%">
               <div class="control dropdown-trigger card has-icons-right">
                 <input
                   v-model="list"
+                  type="text"
                   class="input dropdown-input"
                   aria-haspopup="true"
                   aria-controls="dropdown-menu"
@@ -61,7 +63,7 @@
           </div>
         </div>
       </div>
-      <div class="column is-1">
+      <div style="text-align: right" class="column is-1">
         <button
           @click="add_recipe"
           class="button is-light is-primary"
