@@ -9,6 +9,7 @@ const store = createStore({
       recipe_lists: null,
       recipes: null,
       recipe_view: { id: null },
+      recipe_view_timer: null,
     };
   },
   actions: {
@@ -66,6 +67,16 @@ const store = createStore({
       state.recipes = recipes;
     },
     set_recipe_view(state, recipe) {
+      clearTimeout(state.recipe_view_timer);
+      state.recipe_view_timer = setTimeout(
+        () =>
+          axios.put(
+            `${this.state.hostname}/api/v1/recipe_view`,
+            { id: recipe.id },
+            { withCredentials: true }
+          ),
+        15 * 1000
+      );
       state.recipe_view = recipe;
     },
   },
