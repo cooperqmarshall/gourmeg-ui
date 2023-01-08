@@ -116,10 +116,10 @@ export default {
       this.addLoading = true;
       await axios
         .post(
-          `${this.$store.state.hostname}/api/v1/recipe`,
+          `${this.$store.state.hostname}/api/v2/recipe`,
           {
             url: this.url,
-            list: this.list,
+            recipe_list_name: this.list,
           },
           { withCredentials: true }
         )
