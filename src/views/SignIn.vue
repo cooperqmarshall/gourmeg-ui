@@ -15,6 +15,7 @@
           :error="error"
           v-model:value="password"
         />
+        <p :v-if="!error.field" class="help is-danger">{{ error.error }}</p>
       </div>
       <button
         @click="submit"
@@ -73,7 +74,9 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          if (error.response) {
+          if (error.response.status === 500) {
+            this.error = { error: "server error" };
+          } else if (error.response) {
             this.error = error.response.data;
           }
         });
