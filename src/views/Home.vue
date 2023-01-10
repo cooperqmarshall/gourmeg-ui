@@ -59,18 +59,21 @@ export default {
     AddRecipe,
   },
   data() {
-    return { listDropdownActive: false, sort: "new", order: "down" };
+    return {
+      listDropdownActive: false,
+      sort: "id",
+      order: "down",
+    };
   },
   mounted() {
     this.$store.dispatch("getRecipes");
   },
   computed: {
     recipes() {
-      console.log("here");
       return _.orderBy(
         this.$store.state.recipes,
         this.sort,
-        this.order == "up" ? "desc" : "asc"
+        this.order == "down" ? "desc" : "asc"
       );
     },
   },
