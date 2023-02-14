@@ -1,7 +1,7 @@
 <template>
   <div>
     <Nav />
-    <router-view style="min-height: 90vh" />
+    <router-view style="min-height: 100vh" />
     <Footer />
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   cursor: url("/pizzaslice_1.png"), auto;
 }
+
 a,
 button {
   cursor: url("/whole_pizza.png"), auto !important;
