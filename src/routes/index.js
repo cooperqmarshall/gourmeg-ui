@@ -4,6 +4,7 @@ import SignIn from "@/views/SignIn.vue";
 import Register from "@/views/Register.vue";
 import Landing from "@/views/Landing.vue";
 import Lists from "@/views/Lists.vue";
+import Search from "@/views/Search.vue";
 import store from "@/store";
 
 const routes = [
@@ -29,6 +30,13 @@ const routes = [
   {
     path: "/lists",
     component: Lists,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/search",
+    component: Search,
     meta: {
       requiresAuth: true,
     },
