@@ -20,28 +20,19 @@
               <div class="block">
                 <div class="level is-mobile">
                   <div class="level-item">
-                    <button
-                      @click="this.$router.push('register')"
-                      class="button is-primary is-size-6 is-size-5-tablet"
-                    >
+                    <button @click="this.$router.push('register')" class="button is-primary is-size-6 is-size-5-tablet">
                       Register
                     </button>
                   </div>
                   <div class="level-item">
-                    <button
-                      @click="this.$router.push('signin')"
-                      class="button is-light is-primary is-size-6 is-size-5-tablet"
-                    >
+                    <button @click="this.$router.push('signin')"
+                      class="button is-light is-primary is-size-6 is-size-5-tablet">
                       Sign In
                     </button>
                   </div>
                   <div class="level-item">
                     <button class="button is-dark is-size-6 is-size-5-tablet">
-                      <a
-                        href="https://github.com/cooperqmarshall/gourmeg-ui"
-                        target="_blank"
-                        >Github</a
-                      >
+                      <a href="https://github.com/cooperqmarshall/gourmeg-ui" target="_blank">Github</a>
                     </button>
                   </div>
                 </div>
@@ -108,18 +99,11 @@
         </div>
       </div>
       <div class="block has-text-centered">
-        <button
-          data-aos="zoom-in"
-          @click="this.$router.push('register')"
-          class="button is-size-5 is-primary"
-        >
+        <button data-aos="zoom-in" @click="this.$router.push('register')" class="button is-size-5 is-primary">
           Try it out!
         </button>
       </div>
     </div>
-    <footer class="footer">
-      <div>Created by Cooper Marshall</div>
-    </footer>
   </div>
 </template>
 
@@ -135,19 +119,23 @@ export default {
   background-position: right;
   background-size: 100% auto;
 }
+
 @media only screen and (max-width: 912px) {
   .hero {
     background-size: auto 100%;
   }
 }
+
 .hero-card {
   background-color: rgba(211, 211, 211, 0.7);
   border-radius: 15px;
 }
+
 a {
   color: white;
 }
-.section > .columns {
+
+.section>.columns {
   margin-bottom: 50px;
 }
 </style>
