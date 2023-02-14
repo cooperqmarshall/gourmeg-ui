@@ -1,6 +1,8 @@
 <template>
   <footer class="footer">
-    <div class="content"><p>Created By Cooper Marshall</p></div>
+    <div class="content">
+      <p>Created by Cooper Marshall with &#128154;</p>
+    </div>
   </footer>
 </template>
 
