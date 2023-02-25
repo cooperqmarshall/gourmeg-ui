@@ -8,6 +8,7 @@ const store = createStore({
       user: null,
       recipe_lists: null,
       recipes: null,
+      search_result_recipes: null,
       recipe_view: { id: null },
       recipe_view_timer: null,
     };
@@ -28,6 +29,13 @@ const store = createStore({
         .get(`${this.state.hostname}/api/v1/recipes`, { withCredentials: true })
         .then((response) => {
           commit("set_recipes", response.data.recipes);
+        });
+    },
+    getSearchResultRecipes({ commit }, { search_term }) {
+      axios
+        .get(`${this.state.hostname}/api/v2/search?term=${search_term}`, { withCredentials: true })
+        .then((response) => {
+          commit("set_search_result_recipes", response.data.recipes);
         });
     },
     getUser({ commit }) {
@@ -65,6 +73,9 @@ const store = createStore({
     },
     set_recipes(state, recipes) {
       state.recipes = recipes;
+    },
+    set_search_result_recipes(state, search_result_recipes) {
+      state.search_result_recipes = search_result_recipes;
     },
     set_recipe_view(state, recipe) {
       clearTimeout(state.recipe_view_timer);
