@@ -5,6 +5,7 @@ import Register from "@/views/Register.vue";
 import Landing from "@/views/Landing.vue";
 import Lists from "@/views/Lists.vue";
 import Search from "@/views/Search.vue";
+import Profile from "@/views/Profile.vue";
 import store from "@/store";
 
 const routes = [
@@ -41,6 +42,13 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: "/profile",
+    component: Profile,
+    meta: {
+      requiresAuth: true,
+    },
+  },
 ];
 
 const router = createRouter({
@@ -52,9 +60,11 @@ router.beforeEach(async (to, from, next) => {
   if (to.meta.requiresAuth & !store.state.user) {
     await store.dispatch("getUser");
     if (!store.state.user) {
-      next({
-        path: "/about",
-      });
+      if (to.path == "/") {
+        next({path: "/about"})
+      } else {
+        next({ path: "/signin"});
+      }
     } else {
       next();
     }
