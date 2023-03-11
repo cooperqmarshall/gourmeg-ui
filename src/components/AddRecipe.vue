@@ -1,152 +1,104 @@
 <template>
-  <div class="block">
-    <div class="columns is-centered">
-      <div class="column is-6">
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">URL:</label>
-          </div>
-          <div class="field-body">
-            <div class="field">
-              <div class="control">
-                <input
-                  v-model="url"
-                  type="text"
-                  class="card input"
-                  placeholder="Recipe Website URL"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column is-4" @click="listDropdownActive = true">
-        <div class="field is-horizontal">
-          <div class="field-label is-normal">
-            <label class="label">List:</label>
-          </div>
-          <div
-            v-click-outside="clickOutside"
-            class="field-body dropdown"
-            style="width: 100%"
-            :class="{ 'is-active': listDropdownActive }"
-          >
-            <div class="field" style="width: 100%">
-              <div class="control dropdown-trigger card has-icons-right">
-                <input
-                  v-model="list"
-                  type="text"
-                  class="input dropdown-input"
-                  aria-haspopup="true"
-                  aria-controls="dropdown-menu"
-                  placeholder="List Name"
-                  Name
-                />
-                <span class="icon is-right is-small">
-                  <i class="fas fa-angle-down" aria-hidden="true"></i>
-                </span>
-              </div>
-              <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                <div class="dropdown-content">
-                  <a
-                    v-for="item in lists"
-                    @click="this.list = item.name"
-                    :key="item.id"
-                    class="dropdown-item"
-                  >
-                    {{ item.name }}
-                  </a>
-                  <a v-if="list" class="dropdown-item"> + {{ list }} </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div style="text-align: right" class="column is-1">
-        <button
-          @click="add_recipe"
-          class="button is-light is-primary"
-          :class="{ 'is-loading': addLoading }"
-        >
-          Add
-        </button>
+  <div>
+    <h1>Add Recipe</h1>
+    <input v-model="url" type="text" class="card input" placeholder="URL" />
+    <div @focusout="dropdownActive = false">
+      <input v-model="list" @focusin="dropdownActive = true" type="text" class="" aria-haspopup="true"
+        aria-controls="dropdown-menu" placeholder="List Name">
+      <div v-if="dropdownActive" class="dropdown-content">
+        <a v-for="item in lists" @click="list = item.name; dropdownActive = false;" :key="item.id" class="dropdown-item">
+          {{ item.name }}
+        </a>
+        <a v-if="list" class="dropdown-item"> + {{ list }} </a>
       </div>
     </div>
-    <p class="help is-danger">{{ error.error }}</p>
+    <button @click="add_recipe">
+      Add
+    </button>
+    <p class="help">{{ error.error }}</p>
   </div>
 </template>
 
-<script>
+<script setup>
 import axios from "axios";
-import vClickOutside from "click-outside-vue3";
+import { ref, onMounted, computed } from "vue";
+import { useStore } from 'vuex';
 
-export default {
-  name: "AddRecipe",
-  data() {
-    return {
-      list: "",
-      url: null,
-      listDropdownActive: false,
-      addLoading: false,
-      error: {
+const store = useStore()
+onMounted(() => {
+  store.dispatch("getLists", { withRecipes: false });
+})
+
+
+const list = ref("")
+const dropdownActive = ref(false)
+const url = ref(null)
+const error = ref({ field: "", error: "" })
+
+const lists = computed(() => {
+  return store.state.recipe_lists?.filter((l) =>
+    l.name.includes(list.value)
+  );
+})
+
+async function add_recipe() {
+  await axios
+    .post(
+      `${store.state.hostname}/api/v2/recipe`,
+      {
+        url: url.value,
+        recipe_list_name: list.value,
+      },
+      { withCredentials: true }
+    )
+    .then(() => {
+      url.value = "";
+      list.value = "";
+      error.value = {
         field: "",
         error: "",
-      },
-    };
-  },
-  directives: {
-    clickOutside: vClickOutside.directive,
-  },
-  mounted() {
-    this.$store.dispatch("getLists", { withRecipes: false });
-  },
-  computed: {
-    lists() {
-      return this.$store.state.recipe_lists?.filter((l) =>
-        l.name.includes(this.list)
-      );
-    },
-  },
-  methods: {
-    clickOutside() {
-      this.listDropdownActive = false;
-    },
-    async add_recipe() {
-      this.addLoading = true;
-      await axios
-        .post(
-          `${this.$store.state.hostname}/api/v2/recipe`,
-          {
-            url: this.url,
-            recipe_list_name: this.list,
-          },
-          { withCredentials: true }
-        )
-        .then(() => {
-          this.url = "";
-          this.list = "";
-          this.error = {
-            field: "",
-            error: "",
-          };
-          this.$store.dispatch("getRecipes");
-          this.$store.dispatch("getLists", { withRecipes: true });
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.log(error.response.data);
-            this.error = error.response.data;
-          }
-        });
-      this.addLoading = false;
-    },
-  },
-};
+      };
+      store.dispatch("getRecipes");
+      store.dispatch("getLists", { withRecipes: true });
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.log(error.response.data);
+        error.value = error.response.data;
+      }
+    });
+}
 </script>
 
 <style scoped>
-p {
+h1 {
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 1.5rem 0;
+}
+
+input {
+  font-size: 1.2rem;
+  width: 100%;
+  min-width: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
+  padding: 0.4rem 5%;
+  margin: 0.5rem 0;
+}
+
+button {
+  padding: 8px 12px;
+  font-size: 1rem;
+  background-color: #f89397;
+  border: none;
+  border-radius: 5px;
+}
+
+.dropdown-control:focus {
+  background: red;
 }
 </style>

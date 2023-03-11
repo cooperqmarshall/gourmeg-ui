@@ -2,7 +2,6 @@
   <div class="section">
     <div class="container">
       <h1 class="title is-2 has-text-centered">Lists</h1>
-      <AddRecipe />
       <div
         class="columns is-mobile"
         :class="{ 'is-flex-direction-column': !sidebarVisible }"
@@ -47,7 +46,6 @@
 <script>
 import ListMenu from "@/components/ListMenu.vue";
 import RecipeView from "@/components/RecipeView.vue";
-import AddRecipe from "@/components/AddRecipe.vue";
 
 export default {
   name: "Lists",
@@ -56,7 +54,7 @@ export default {
       sidebarVisible: false,
     };
   },
-  components: { ListMenu, RecipeView, AddRecipe },
+  components: { ListMenu, RecipeView },
   computed: {
     recipe_lists() {
       return this.$store.state.recipe_lists;
