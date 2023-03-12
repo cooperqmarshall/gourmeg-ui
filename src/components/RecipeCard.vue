@@ -11,7 +11,7 @@
           {{ recipe.name }}
         </p>
         <p class="title is-5">{{ recipe.recipe_list_name }}</p>
-        <button @click="focus_recipe(recipe)" class="button recipe-btn">
+        <button @click="focus_recipe(recipe); $emit('navigateToRecipe')" class="button recipe-btn">
           Go to Recipe
         </button>
       </div>

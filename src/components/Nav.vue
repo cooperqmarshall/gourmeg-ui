@@ -29,7 +29,8 @@
     </ul>
   </nav>
   <div v-if="addRecipeActive" class="add-recipe-container">
-    <AddRecipe />
+    <font-awesome-icon @click="addRecipeActive = false" icon="fa-xmark" fixed-width size="lg" style="color: white;" />
+    <AddRecipe @close-overlay="addRecipeActive = false"/>
   </div>
 </template>
 
@@ -98,14 +99,20 @@ nav button {
   top: 0;
   display: flex;
   justify-content: center;
-  align-items: center;
   padding: 0 1rem;
   background-image: linear-gradient(black, #4caa80);
   z-index: 99;
+  padding-top: 3rem;
 }
 
-.add-recipe-container>*{
-  margin-bottom: 50%;
+.add-recipe-container>svg {
+  font-size: 1.7rem;
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+
+.add-recipe-container>div{
   width: min(100%, 600px);
 }
 
