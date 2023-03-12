@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <div class="container">
-      <h1 class="title is-2 has-text-centered">Lists</h1>
+      <h1 class="title is-2 has-text-centered">My Lists</h1>
       <div
         class="columns is-mobile"
         :class="{ 'is-flex-direction-column': !sidebarVisible }"

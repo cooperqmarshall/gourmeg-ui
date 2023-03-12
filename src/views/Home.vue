@@ -1,7 +1,7 @@
 <template>
   <div class="section">
     <div class="container">
-      <h1 class="title is-2 has-text-centered">Home</h1>
+      <h1 class="title is-2 has-text-centered">Let's Get Cooking!</h1>
       <div class="block" style="display: flex; align-items: center">
         <div
           class="dropdown"
