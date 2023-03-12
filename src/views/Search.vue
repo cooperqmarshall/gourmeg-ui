@@ -3,8 +3,8 @@
     <div class="search-container">
       <input v-model="search_term" type="text" name="search">
       <button @click="initSearch">Search</button>
+      <p v-if="search_result_recipes">Found {{ search_result_recipes.length }} result{{ search_result_recipes.length === 1 ? '' : 's'}}...</p>
     </div>
-    <p v-if="search_result_recipes">Found {{ search_result_recipes.length }} result{{ search_result_recipes.length === 1 ? '' : 's'}}...</p>
     <div class="search-results">
       <RecipeCard v-for="r in search_result_recipes" :recipe="r" :key="r.id" />
     </div>
@@ -36,13 +36,15 @@ h1 {
 }
 p {
   margin: 0 1rem;
+  width: 1000px;
 }
 .search-container {
-  text-align: center;
-  margin: 1rem;
+  max-width: 1000px;
+  margin: 1rem auto;
+  padding: 1rem;
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 input {
@@ -52,7 +54,8 @@ input {
   border-radius: 0.5rem;
   border: 1px solid #e8e8e8;
   box-shadow: 0 0.5em 1em -0.125em rgba(10, 10, 10, 0.1), 0 0px 0 1px rgba(10, 10, 10, 0.02);
-  padding: 0.4rem 5%;
+  padding: 0.4rem 15px;
+  flex: 1 0;
 }
 
 button {
